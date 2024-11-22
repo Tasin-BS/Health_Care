@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: user-service  # Service name
+
+server:
+  port: 8082  # Service port
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # Eureka server URL
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    hostname: localhost  # Optional: specify the hostname
+    prefer-ip-address: true  # Optional: prefer IP address over hostname for service discovery
