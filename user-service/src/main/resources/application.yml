@@ -16,20 +16,21 @@ spring:
         hibernate:
           dialect: org.hibernate.dialect.H2Dialect
 
+  # Ensure you are not disabling Spring Cloud Config unless you need it
+  cloud:
+    config:
+      enabled: false  # Remove this line if you're not using Spring Cloud Config
+
 server:
-  port: 8082  # Service port
+  port: 8082  # Service port for the user-service
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/  # Eureka server URL (use actual Eureka IP if not running locally)
-    fetch-registry: true
-    register-with-eureka: true
+    fetch-registry: true  # Whether to fetch the registry from Eureka
+    register-with-eureka: true  # Whether to register with Eureka server
   instance:
-    hostname: localhost  # Optional: specify the hostname
-    prefer-ip-address: true  # Optional: prefer IP address over hostname for service discovery
+    hostname: localhost  # Optional: specify the hostname if necessary
+    prefer-ip-address: true  # Prefer IP address over hostname for service discovery
 
-# Optional: logging and other configurations
-logging:
-  level:
-    com.netflix.discovery: DEBUG

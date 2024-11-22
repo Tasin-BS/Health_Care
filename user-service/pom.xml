@@ -4,59 +4,58 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
+    <!-- Child project setup -->
+    <groupId>org.management_system</groupId>
     <artifactId>user-service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>user-service</name>
-    <description>User Service</description>
+    <name>User Service</name>
+    <description>User Service for HCare</description>
     <url>http://maven.apache.org</url>
 
+    <!-- Parent POM declaration -->
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.8</version> <!-- Use the latest version of Spring Boot -->
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>org.management_system</groupId>
+        <artifactId>HCare</artifactId>
+        <version>3.4.0</version> <!-- Use the version of the parent POM -->
+        <relativePath>../HCare/pom.xml</relativePath> <!-- Path to the parent POM -->
     </parent>
 
     <dependencies>
-        <!-- Spring Boot Starter Web (Required for a web application) -->
+        <!-- Spring Boot Starter Web (for creating a web application) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Spring Boot Starter Test (for testing, includes @SpringBootTest) -->
+        <!-- Spring Boot Starter Test (for testing) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- JUnit 5 dependencies -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!-- JUnit 5 dependencies for unit testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.2</version> <!-- Use the latest version -->
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.8.2</version> <!-- Use the latest version -->
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- JUnit 5 Platform Runner (optional, for running JUnit 5 tests) -->
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-            <version>1.8.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- H2 database for testing (Optional, only if you're using it) -->
+        <!-- Optional H2 Database for in-memory testing -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -67,14 +66,14 @@
 
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin for Java version -->
+            <!-- Maven Compiler Plugin to specify Java version -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>11</source> <!-- Set to your desired Java version -->
-                    <target>11</target> <!-- Set to your desired Java version -->
+                    <source>11</source> <!-- Java source version -->
+                    <target>11</target> <!-- Java target version -->
                 </configuration>
             </plugin>
 
