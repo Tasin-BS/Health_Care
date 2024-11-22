@@ -1,25 +1,32 @@
 spring:
   application:
-    name: gateway  # Service name
+    name: gateway  # The name of the Gateway service
+  main:
+    web-application-type: reactive
+
   cloud:
     gateway:
-          routes:
-            - id: user-service
-              uri: lb://user-service  # Eureka load balancing
-              predicates:
-                - Path=/user/**  # Route all requests to /user/** to the user service
-            # Add more services here if needed
+      routes:
+        - id: user-service
+          uri: lb://user-service  # Load balanced URI for the user service registered in Eureka
+          predicates:
+            - Path=/user/**  # Route all requests to /user/** to the user service
+
+        # You can add other routes here for additional services as needed.
+        # - id: other-service
+        #   uri: lb://other-service
+        #   predicates:
+        #     - Path=/other/**
+
+    config:
+      enabled: false  # Import configuration from Spring Cloud Config Server
 
 server:
-  port: 8083  # Service port
+  port: 8083  # The port on which the Gateway service will run
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/  # Eureka server URL
-    fetch-registry: true
-    register-with-eureka: true
-  instance:
-    hostname: localhost  # Optional: specify the hostname
-    prefer-ip-address: true  # Optional: prefer IP address over hostname for service discovery
-
+    fetch-registry: true  # Whether to fetch registry information from Eureka
+    register-with-eureka: true  # Whether to register this service with Eureka
